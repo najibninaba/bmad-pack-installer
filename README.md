@@ -4,25 +4,56 @@ A modern Python tool for installing BMAD (Breakthrough Method for Agile Ai Drive
 
 ## Features
 
-- ✅ **Automated Installation**: Complete automation of the BMAD expansion pack installation process
-- 🔗 **Symbolic Link Management**: Automatic creation of symbolic links for Claude Code integration
-- 📦 **Hidden Directory Structure**: Proper hidden directory creation (`.bmad-pack-name`)
-- 🔐 **File Integrity**: SHA-256 hash generation and verification
-- 📋 **Manifest Management**: Automatic creation and updating of installation manifests
-- 🎯 **Smart Exclusions**: Built-in exclusion of development files and directories
-- 🖥️ **Cross-Platform**: Works on Windows, macOS, and Linux
-- 🌈 **Beautiful CLI**: Rich terminal output with progress indicators
-- 🔍 **Validation**: Comprehensive validation of source packs and target projects
+- Installs BMAD expansion packs with proper directory structure
+- Creates symbolic links for Claude Code integration
+- Generates hidden directories using `.bmad-pack-name` format
+- Provides SHA-256 hash generation and verification
+- Creates and updates installation manifests
+- Excludes development files and directories automatically
+- Supports Windows, macOS, and Linux
+- Displays progress indicators during installation
+- Validates source packs and target projects
 
 ## Installation
 
-The installer is designed to be run via `uv tool run` or `uvx`:
+### From PyPI
 
 ```bash
-# Run directly with uvx (recommended)
+# Install with pip
+pip install bmad-pack-installer
+
+# Install with uv
+uv add bmad-pack-installer
+
+# Use the installed tool
+bmad-pack-installer deploy ./expansion-pack-source ./target-project
+```
+
+### From GitHub Source
+
+```bash
+# Clone the repository
+git clone https://github.com/najibninaba/bmad-pack-installer.git
+cd bmad-pack-installer
+
+# Install in virtual environment with uv
+uv venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+uv pip install -e .
+
+# Install in virtual environment with pip
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -e .
+```
+
+### Direct Usage (No Installation)
+
+```bash
+# Run directly with uvx
 uvx bmad-pack-installer deploy ./expansion-pack-source ./target-project
 
-# Or install as a tool
+# Install as uv tool
 uv tool install bmad-pack-installer
 bmad-pack-installer deploy ./expansion-pack-source ./target-project
 ```
@@ -120,12 +151,12 @@ slashPrefix: commandName         # Claude command name (optional)
 
 The installer performs these steps:
 
-1. **Validation**: Verifies source pack and target project
-2. **File Copying**: Copies files to hidden `.bmad-pack-name/` directory
-3. **Hash Generation**: Generates SHA-256 hashes for integrity checking
-4. **Manifest Creation**: Creates installation manifests
-5. **Core Update**: Updates `.bmad-core/install-manifest.yaml`
-6. **Claude Integration**: Creates symbolic links in `.claude/commands/`
+1. Validates source pack and target project
+2. Copies files to hidden `.bmad-pack-name/` directory
+3. Generates SHA-256 hashes for integrity checking
+4. Creates installation manifests
+5. Updates `.bmad-core/install-manifest.yaml`
+6. Creates symbolic links in `.claude/commands/`
 
 ## Exclusions
 
