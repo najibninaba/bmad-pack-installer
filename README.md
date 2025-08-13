@@ -158,21 +158,6 @@ The installer performs these steps:
 5. Updates `.bmad-core/install-manifest.yaml`
 6. Creates symbolic links in `.claude/commands/`
 
-## Exclusions
-
-These files/directories are automatically excluded from installation:
-
-- `install-expansion-pack-plan.md`
-- `exclusion-list.txt`
-- `CLAUDE.md`
-- `.claude/`
-- `.taskmaster/`
-- `.mcp.json`
-- `.gitignore`
-- `.git/`
-- `bmad-pack-installer/`
-
-You can add custom exclusions by creating an `exclusion-list.txt` file in your expansion pack.
 
 ## Examples
 
