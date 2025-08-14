@@ -151,3 +151,7 @@ Thumbs.db
 .env.*.local
 config/local.py
 settings/local.py
+
+# Test artifacts
+test-project/
+.test-data/

@@ -16,20 +16,38 @@ A modern Python tool for installing BMAD (Breakthrough Method for Agile Ai Drive
 
 ## Installation
 
-### From PyPI
+### Recommended: Install as Tool
 
 ```bash
-# Install with pip
-pip install bmad-pack-installer
+# Install once (recommended for regular use)
+uv tool install bmad-pack-installer
 
-# Install with uv
-uv add bmad-pack-installer
-
-# Use the installed tool
+# Use anywhere - command available globally
+bmad-pack-installer --version
 bmad-pack-installer deploy ./expansion-pack-source ./target-project
 ```
 
-### From GitHub Source
+### Quick Use Without Installation
+
+```bash
+# Run directly with uvx (no installation needed)
+uvx --from bmad-pack-installer bmad-pack-installer deploy ./expansion-pack-source ./target-project
+```
+
+### Install in Project
+
+```bash
+# Add to current project dependencies
+uv add bmad-pack-installer
+
+# Or install with pip
+pip install bmad-pack-installer
+
+# Use in project context
+uv run bmad-pack-installer deploy ./expansion-pack-source ./target-project
+```
+
+### Install from Source (Development)
 
 ```bash
 # Clone the repository
@@ -47,15 +65,22 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -e .
 ```
 
-### Direct Usage (No Installation)
+## Updating
+
+To upgrade to the latest version:
 
 ```bash
-# Run directly with uvx
-uvx bmad-pack-installer deploy ./expansion-pack-source ./target-project
+# If installed as a tool (recommended)
+uv tool upgrade bmad-pack-installer
 
-# Install as uv tool
-uv tool install bmad-pack-installer
-bmad-pack-installer deploy ./expansion-pack-source ./target-project
+# If installed with pip
+pip install --upgrade bmad-pack-installer
+
+# If installed in a project with uv
+uv add --upgrade bmad-pack-installer
+
+# Check current version
+bmad-pack-installer --version
 ```
 
 ## Usage
@@ -63,42 +88,44 @@ bmad-pack-installer deploy ./expansion-pack-source ./target-project
 ### Basic Deployment
 
 ```bash
-# Deploy expansion pack to BMAD project
-uvx bmad-pack-installer deploy ./bmad-aisg-aiml /path/to/project
+# Deploy expansion pack to BMAD project (assumes tool installation)
+bmad-pack-installer deploy ./bmad-aisg-aiml /path/to/project
 ```
 
 ### Advanced Options
 
 ```bash
 # Custom pack and command names
-uvx bmad-pack-installer deploy ./source /target \
+bmad-pack-installer deploy ./source /target \
   --pack-name=ai-ml-engineering \
   --command-name=bmadAISG
 
 # Dry run to preview changes
-uvx bmad-pack-installer deploy ./source /target --dry-run
+bmad-pack-installer deploy ./source /target --dry-run
 
 # Force reinstall over existing pack
-uvx bmad-pack-installer deploy ./source /target --force
+bmad-pack-installer deploy ./source /target --force
 
 # Skip certain installation steps
-uvx bmad-pack-installer deploy ./source /target \
+bmad-pack-installer deploy ./source /target \
   --skip-core-update \
   --skip-symlinks
 
 # Configure for different IDE
-uvx bmad-pack-installer deploy ./source /target --ide=cursor
+bmad-pack-installer deploy ./source /target --ide=cursor
 ```
 
 ### Validation Commands
 
 ```bash
 # Check if directory is a valid BMAD project
-uvx bmad-pack-installer check /path/to/project
+bmad-pack-installer check /path/to/project
 
 # Validate expansion pack structure
-uvx bmad-pack-installer validate ./expansion-pack
+bmad-pack-installer validate ./expansion-pack
 ```
+
+> **Note:** If you haven't installed as a tool, prefix commands with `uvx --from bmad-pack-installer` or use `uv run bmad-pack-installer` if installed in a project.
 
 ## Command Line Options
 
@@ -165,7 +192,7 @@ The installer performs these steps:
 
 ```bash
 # Basic deployment
-uvx bmad-pack-installer deploy ./bmad-aisg-aiml ./my-project
+bmad-pack-installer deploy ./bmad-aisg-aiml ./my-project
 
 # Results in:
 # - Hidden directory: ./my-project/.bmad-aisg-aiml/
@@ -176,7 +203,7 @@ uvx bmad-pack-installer deploy ./bmad-aisg-aiml ./my-project
 ### Dry Run Preview
 
 ```bash
-uvx bmad-pack-installer deploy ./pack ./project --dry-run
+bmad-pack-installer deploy ./pack ./project --dry-run
 
 # Output:
 # DRY RUN: Would deploy expansion pack 'bmad-pack-name'

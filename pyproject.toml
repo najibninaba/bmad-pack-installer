@@ -1,6 +1,6 @@
 [project]
 name = "bmad-pack-installer"
-version = "1.0.0"
+version = "1.1.0"
 description = "Installer for BMAD expansion packs"
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -23,7 +23,6 @@ dependencies = [
     "click>=8.1.0",
     "pyyaml>=6.0",
     "rich>=13.0.0",
-    "pathlib-abc>=0.1.0",
 ]
 
 [project.urls]
@@ -48,6 +47,9 @@ dev-dependencies = [
     "black>=23.0.0",
     "flake8>=6.0.0",
     "mypy>=1.0.0",
+    "build>=0.10.0",
+    "twine>=4.0.0",
+    "toml>=0.10.2",
 ]
 
 [tool.black]
@@ -76,3 +78,10 @@ warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
 ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
