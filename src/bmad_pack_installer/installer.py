@@ -134,9 +134,9 @@ class ExpansionPackInstaller:
                 # Ensure target directory exists
                 target_file.parent.mkdir(parents=True, exist_ok=True)
                 
-                # Copy file
+                # Copy file with content processing
                 try:
-                    shutil.copy2(source_file, target_file)
+                    self._copy_and_process_file(source_file, target_file, target_dir)
                 except (PermissionError, OSError) as e:
                     self.warnings.append(f"Failed to copy {relative_path}: {e}")
                     continue
@@ -165,6 +165,25 @@ class ExpansionPackInstaller:
         
         return target_dir, files_data
     
+    def _copy_and_process_file(self, source_file: Path, target_file: Path, target_dir: Path) -> None:
+        """Copy a file and process its content to replace {root} with the hidden folder path.
+        
+        Args:
+            source_file: Source file path
+            target_file: Target file path
+            target_dir: Target directory (hidden folder) path
+        """
+        # Try to read as text file first
+        content = source_file.read_text(encoding='utf-8')
+        
+        # Replace {root} with the hidden folder path
+        if '{root}' in content:
+            root_path = target_dir.name
+            processed_content = content.replace('{root}', root_path)
+            target_file.write_text(processed_content, encoding='utf-8')
+        else:
+            # No replacement needed, write as-is
+            target_file.write_text(content, encoding='utf-8')
     def install(
         self,
         pack_name: Optional[str] = None,
